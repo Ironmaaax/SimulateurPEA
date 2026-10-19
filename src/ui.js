@@ -198,7 +198,9 @@
   /* =================== cours en ligne =================== */
   function validQuotes(q) { return !!(q && typeof q === "object" && q.etfs && typeof q.etfs === "object" && typeof q.updated === "string"); }
   function cachedQuotes() { try { const q = JSON.parse(lsGet(LS_QUOTES)); return validQuotes(q) ? q : null; } catch (e) { return null; } }
-  let QUOTES = cachedQuotes(), QUOTES_LIVE = false, QUOTES_TRIED = false;
+  let QUOTES = cachedQuotes(), QUOTES_LIVE = false, QUOTES_TRIED = false, QUOTES_CHECKED = 0, QUOTES_BUSY = false;
+  const QUOTES_EVERY = 10 * 60 * 1000;
+  function hm(d) { return d.getHours() + NB + "h" + NB + String(d.getMinutes()).padStart(2, "0"); }
   function quoteOf(id) { const q = QUOTES && QUOTES.etfs[id]; return q && Number.isFinite(q.price) && q.price > 0 ? q : null; }
   function frDate(iso) { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || ""); return m ? m[3] + "/" + m[2] + "/" + m[1] : ""; }
   let S = loadState();
@@ -342,8 +344,10 @@
     const note = $("quotes-note"); if (!note) return;
     if (QUOTES) {
       const dates = Object.values(QUOTES.etfs).map(q => q && q.date).filter(Boolean).sort();
-      note.textContent = "Cours du " + frDate(dates[dates.length - 1]) + " (" + String(QUOTES.source || "en ligne").replace(/ \(.*\)$/, "") + ")" +
-        (QUOTES_LIVE || !QUOTES_TRIED ? "." : " : dernière version enregistrée, cours en ligne injoignables.") +
+      const up = new Date(QUOTES.updated);
+      note.textContent = "Cours du " + frDate(dates[dates.length - 1]) + " (" + String(QUOTES.source || "en ligne").replace(/ \(.*\)$/, "") +
+        (isNaN(up) ? "" : ", relevés le " + up.toLocaleDateString("fr-FR") + " à " + hm(up)) + ")" +
+        (QUOTES_LIVE ? ", vérifiés à " + hm(new Date(QUOTES_CHECKED)) + "." : !QUOTES_TRIED ? "." : " : dernière version enregistrée, cours en ligne injoignables.") +
         " Saisis un nombre de parts pour valoriser une ligne au dernier cours.";
     } else note.textContent = QUOTES_TRIED ? "Cours en ligne injoignables : saisis les montants à la main." : "";
   }
@@ -352,6 +356,10 @@
     if (/^https?:$/.test(location.protocol)) urls.push("cours.json");
     if (S.quotesUrl) urls.push(S.quotesUrl);
     if (typeof fetch !== "function" || !urls.length) { refreshHoldings(); return; }
+    if (QUOTES_BUSY) return;
+    QUOTES_BUSY = true;
+    const before = QUOTES ? QUOTES.updated : null;
+    let ok = false;
     for (const u of urls) {
       try {
         const ctl = typeof AbortController === "function" ? new AbortController() : null;
@@ -359,13 +367,22 @@
         const r = await fetch(u, { cache: "no-cache", signal: ctl ? ctl.signal : undefined }); clearTimeout(t);
         if (!r.ok) continue;
         const q = await r.json(); if (!validQuotes(q)) continue;
-        QUOTES = q; QUOTES_LIVE = true; lsSet(LS_QUOTES, JSON.stringify(q)); break;
+        QUOTES = q; ok = true; lsSet(LS_QUOTES, JSON.stringify(q)); break;
       } catch (e) { /* source suivante */ }
     }
-    QUOTES_TRIED = true;
-    S = sanitizeState(S); syncBindings($("hold-rows")); refreshHoldings(); saveSoon();
+    QUOTES_BUSY = false; QUOTES_TRIED = true; QUOTES_LIVE = ok; QUOTES_CHECKED = Date.now();
+    const changed = !!QUOTES && QUOTES.updated !== before;
+    if (changed) { S = sanitizeState(S); syncBindings($("hold-rows")); saveSoon(); }
+    refreshHoldings();
+    if (!changed) return;
     if (S.tab === "compare") renderCompare();
     queueCompute();
+  }
+  /* Page restée ouverte : nouvelle lecture des cours toutes les 10 minutes, et au retour sur l’onglet. */
+  function watchQuotes() {
+    const due = () => document.visibilityState !== "hidden" && Date.now() - QUOTES_CHECKED >= QUOTES_EVERY;
+    setInterval(() => { if (due()) loadQuotes(); }, 60 * 1000);
+    document.addEventListener("visibilitychange", () => { if (due()) loadQuotes(); });
   }
   function wSummary(sc) {
     const E = DATA.etfs, w = scenarioWeights(sc, E).w;
@@ -1121,6 +1138,7 @@
     window.addEventListener("resize", debounce(() => { updateHdr(); if (S.tab === "sim") renderSimCharts(); if (S.tab === "compare") renderCompare(); if (S.tab === "opt") renderOpt(); }, 150));
     setTimeout(initDownloads, 0);
     setTimeout(loadQuotes, 0);
+    watchQuotes();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();
