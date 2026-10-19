@@ -22,9 +22,6 @@ concurrency:
 jobs:
   cours:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -46,6 +43,22 @@ jobs:
             git commit -m "Cours du $(date -u +'%Y-%m-%d %H:%M') UTC"
             git push
           fi
+
+  # Publication séparée : si GitHub Pages n’est pas activé, seule cette étape échoue, les cours restent à jour.
+  publication:
+    needs: cours
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
       - name: Construire le simulateur
         run: python build.py
