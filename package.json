@@ -1,0 +1,13 @@
+{
+  "name": "simulateur-etf-pea",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Simulateur ETF PEA : projections Monte Carlo, comparaison, optimisation",
+  "scripts": {
+    "build": "python3 build.py",
+    "test": "node test/ui.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "24.1.3"
+  }
+}

@@ -1,0 +1,58 @@
+name: Cours et publication
+
+on:
+  schedule:
+    # Heures UTC, du lundi au vendredi : toutes les 2 heures pendant la séance, puis après la clôture d’Euronext.
+    # GitHub peut retarder ces lancements de quelques minutes à une heure.
+    - cron: "20 8-16/2 * * 1-5"
+    - cron: "50 16 * * 1-5"
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: cours
+  cancel-in-progress: false
+
+jobs:
+  cours:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Récupérer les cours
+        run: |
+          pip install --quiet yfinance
+          python scripts/maj_cours.py
+
+      - name: Enregistrer les cours dans le dépôt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cours.json
+          if git diff --cached --quiet; then echo "Cours inchangés."; else
+            git commit -m "Cours du $(date -u +'%Y-%m-%d %H:%M') UTC"
+            git push
+          fi
+
+      - name: Construire le simulateur
+        run: python build.py
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deploy
+        uses: actions/deploy-pages@v4

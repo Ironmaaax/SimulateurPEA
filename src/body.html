@@ -1,0 +1,187 @@
+<header class="top" id="top"><div class="top-inner">
+  <div class="brand">
+    <h1>Simulateur ETF PEA</h1>
+    <p class="sub" id="sub">Projections, comparaisons et optimisation de ton PEA, calculées sur ton appareil. Aide à la décision, pas un conseil en investissement.</p>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button type="button" role="tab" data-tab="sim" aria-controls="p-sim">Simuler</button>
+    <button type="button" role="tab" data-tab="compare" aria-controls="p-compare">Comparer</button>
+    <button type="button" role="tab" data-tab="opt" aria-controls="p-opt">Optimiser</button>
+    <button type="button" role="tab" data-tab="data" aria-controls="p-data">Données</button>
+    <button type="button" role="tab" data-tab="settings" aria-controls="p-settings">Réglages</button>
+  </nav>
+</div></header>
+<main>
+  <!-- ================= Simuler ================= -->
+  <section id="p-sim" role="tabpanel" aria-label="Simuler">
+    <div class="sim-grid">
+      <div class="sim-results">
+        <div class="chips" id="sc-chips" role="group" aria-label="Scénario affiché"></div>
+        <h2 class="first">Cône des possibles à <span id="h-label">10 ans</span></h2>
+        <p class="note" id="sim-note"></p>
+        <p class="warn" id="sim-warn" hidden></p>
+        <div class="chart" id="fan"></div>
+        <ul class="legend" id="fan-legend"></ul>
+        <div class="kpi-wrap tablewrap" id="kpis"></div>
+        <h2>Distribution à l’horizon</h2>
+        <div class="chart" id="hist"></div>
+        <p class="note" id="hist-note"></p>
+        <h2 id="bt-title">Rejoué sur les années réelles</h2>
+        <div class="chart" id="bt-chart"></div>
+        <div class="tablewrap" id="bt-table"></div>
+        <p class="note" id="bt-note"></p>
+        <div class="btns"><button class="btn ghost" type="button" id="exp-csv">Exporter les résultats (CSV)</button></div>
+      </div>
+      <aside class="sim-controls" aria-label="Paramètres de la simulation">
+        <div class="ctl">
+          <h2>Scénarios</h2>
+          <div id="sc-editors"></div>
+          <button class="btn ghost" type="button" id="sc-add">Ajouter un scénario</button>
+        </div>
+        <div class="ctl">
+          <h2>Capital et versements</h2>
+          <p class="note">Valeur actuelle de chaque ligne (€)</p>
+          <div id="hold-rows"></div>
+          <p class="note" id="quotes-note" role="status"></p>
+          <div class="fields2">
+            <label class="field"><span>Déjà versé sur le PEA (€)</span><input type="number" inputmode="decimal" min="0" step="100" data-bind="deposits"></label>
+            <label class="field"><span>Versement mensuel (€)</span><input type="number" inputmode="decimal" min="0" step="50" data-bind="monthly"></label>
+          </div>
+          <label class="field"><span>Hausse annuelle du versement (%)</span><input type="number" inputmode="decimal" step="0.5" data-bind="monthlyGrowth" data-scale="100"></label>
+          <label class="field"><span>Horizon : <output id="horizon-out"></output></span><input type="range" min="1" max="40" step="1" data-bind="horizon"></label>
+          <p class="note" id="cap-note"></p>
+        </div>
+        <div class="ctl">
+          <h2>Objectif</h2>
+          <div class="fields2">
+            <label class="field"><span id="goal-label">Montant visé (€)</span><input type="number" inputmode="decimal" min="0" step="1000" data-bind="goal" placeholder="0 = aucun"></label>
+            <label class="field"><span>Avec une probabilité de</span>
+              <select data-bind="goalConf" data-num="1"><option value="0.5">50 %</option><option value="0.7">70 %</option><option value="0.8">80 %</option><option value="0.9">90 %</option><option value="0.95">95 %</option></select></label>
+          </div>
+          <button class="btn ghost" type="button" id="goal-solve">Calculer le versement nécessaire</button>
+          <p class="note" id="goal-out" role="status"></p>
+        </div>
+        <div class="ctl">
+          <h2>Modèle</h2>
+          <div class="seg" role="radiogroup" aria-label="Modèle de projection">
+            <button type="button" role="radio" data-set="mode" data-val="boot">Années réelles</button>
+            <button type="button" role="radio" data-set="mode" data-val="param">Paramétrique</button>
+          </div>
+          <div class="seg" role="radiogroup" aria-label="Pas de temps" id="step-seg">
+            <button type="button" role="radio" data-set="step" data-val="month">Mensuel</button>
+            <button type="button" role="radio" data-set="step" data-val="year">Annuel</button>
+          </div>
+          <p class="note" id="model-note"></p>
+          <button class="btn ghost small" type="button" data-goto="settings">Tous les réglages</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================= Comparer ================= -->
+  <section id="p-compare" role="tabpanel" aria-label="Comparer" hidden>
+    <div class="cmp-controls">
+      <label class="field"><span>Période</span>
+        <select data-bind="window"><option value="common">Années communes à tous</option><option value="max">Tout l’historique de chacun</option></select></label>
+      <label class="field"><span>Trier par</span><select data-bind="sort" id="cmp-sort"></select></label>
+    </div>
+    <p class="note" id="cmp-note"></p>
+    <div class="cmp-charts">
+      <div><h2>Rendement et risque</h2><div class="chart" id="cmp-scatter"></div><p class="note" id="cmp-scatter-note"></p></div>
+      <div><h2>Corrélations</h2><div class="chart heat" id="cmp-heat"></div><p class="note" id="cmp-heat-note"></p></div>
+    </div>
+    <h2>Fiches</h2>
+    <div class="cards" id="cmp-list"></div>
+  </section>
+
+  <!-- ================= Optimiser ================= -->
+  <section id="p-opt" role="tabpanel" aria-label="Optimiser" hidden>
+    <div class="opt-grid">
+      <div>
+        <h2 class="first">Toutes les allocations possibles</h2>
+        <p class="note" id="opt-note"></p>
+        <p class="warn" id="opt-warn" hidden></p>
+        <div class="chart" id="opt-chart"></div>
+        <ul class="legend" id="opt-legend"></ul>
+        <div class="tablewrap" id="opt-results"></div>
+      </div>
+      <aside class="ctl" aria-label="Contraintes de l’optimiseur">
+        <h2>Contraintes</h2>
+        <div class="fields2">
+          <label class="field"><span>Pas de la grille</span>
+            <select data-bind="opt.step" data-num="1"><option value="0.025">2,5 %</option><option value="0.05">5 %</option><option value="0.1">10 %</option><option value="0.2">20 %</option></select></label>
+          <label class="field"><span>Volatilité cible (%)</span><input type="number" inputmode="decimal" step="0.5" min="1" data-bind="opt.targetVol" data-scale="100"></label>
+        </div>
+        <label class="field"><span>Taux sans risque pour le ratio (%)</span><input type="number" inputmode="decimal" step="0.25" data-bind="opt.rf" data-scale="100"></label>
+        <p class="note">Part minimale et maximale par ETF (%)</p>
+        <div class="bounds" id="opt-bounds"></div>
+        <label class="field"><span>Scénario modifié par « Appliquer »</span><select data-bind="opt.target" id="opt-target"></select></label>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================= Données ================= -->
+  <section id="p-data" role="tabpanel" aria-label="Données" hidden>
+    <h2 class="first">Modifier les ETF</h2>
+    <p class="note">Corrige une valeur, ajoute une année depuis un reporting ou un nouvel ETF, puis enregistre. Tes modifications restent sur cet appareil.</p>
+    <div id="ed-list"></div>
+    <div class="btns">
+      <button class="btn ghost" type="button" id="ed-add">Ajouter un ETF</button>
+      <button class="btn" type="button" id="ed-save">Enregistrer les modifications</button>
+      <button class="btn ghost" type="button" id="ed-cancel">Annuler les modifications</button>
+    </div>
+    <p class="note" id="ed-msg" role="status"></p>
+    <h2>Sources</h2>
+    <div class="tablewrap"><table class="data" id="data-table"></table></div>
+    <p class="note">Rendements : performances calendaires des valeurs liquidatives en EUR, frais déduits. Volatilité : sur 3 ans, tirée des mêmes documents. L’année en cours n’entre dans aucun calcul.</p>
+    <h2>Format JSON</h2>
+    <p class="note">Pour copier tes données ailleurs ou en coller de nouvelles d’un bloc.</p>
+    <textarea id="json" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Données au format JSON"></textarea>
+    <div class="btns">
+      <button class="btn" type="button" id="json-apply">Appliquer le JSON</button>
+      <button class="btn ghost" type="button" id="json-copy">Copier le JSON</button>
+      <button class="btn ghost" type="button" id="json-reset">Revenir aux données d’origine</button>
+    </div>
+    <p class="note" id="json-msg" role="status"></p>
+    <details class="method">
+      <summary>Comment c’est calculé</summary>
+      <p><strong>Années réelles.</strong> Chaque année simulée reprend une année réellement vécue par tous les ETF utilisés, tirée au hasard (seule ou en bloc d’années consécutives). Les ETF bougent ensemble comme ils l’ont fait, krachs compris. Tous les scénarios reçoivent les mêmes tirages, pour rester comparables.</p>
+      <p><strong>Paramétrique.</strong> Rendements log-normaux, au pas mensuel ou annuel. Volatilité au choix (reportings, écart-type annuel ou saisie), corrélations estimées par paire puis rapprochées de leur moyenne, ou identiques pour toutes les paires. Rendement médian au choix : le même pour tous (frais déduits), historique, ou saisi.</p>
+      <p><strong>Versements et rééquilibrage.</strong> Versements en début de mois, avec hausse annuelle éventuelle et arrêt au plafond du PEA. Rééquilibrage : aucun, par les versements (l’argent neuf va aux lignes en retard, sans vente), chaque année, ou seulement quand un écart dépasse le seuil. Chaque arbitrage coûte les frais d’ordre réglés ; les versements programmés n’en coûtent pas.</p>
+      <p><strong>Impôt.</strong> Calculé comme si tout était retiré à l’horizon : sur le gain au-delà des versements, prélèvements sociaux pour un PEA de plus de 5 ans, flat tax sinon ou pour un compte-titres.</p>
+      <p><strong>Optimiseur.</strong> Teste toutes les allocations de la grille avec les hypothèses paramétriques. Rendement médian estimé = moyenne pondérée moins la moitié de la variance du portefeuille.</p>
+      <p><strong>Limites.</strong> Peu d’années communes aux ETF, aucune donnée intra-annuelle réelle, ni dividendes à part, ni frais de change. Les performances passées ne préjugent pas des performances futures.</p>
+    </details>
+  </section>
+
+  <!-- ================= Réglages ================= -->
+  <section id="p-settings" role="tabpanel" aria-label="Réglages" hidden>
+    <div class="settings" id="settings"></div>
+    <fieldset>
+      <legend>Sauvegarde</legend>
+      <div class="btns">
+        <button class="btn ghost" type="button" id="cfg-export">Exporter la configuration</button>
+        <button class="btn danger" type="button" id="cfg-reset">Tout réinitialiser</button>
+      </div>
+      <label class="field"><span>Importer une configuration (colle le JSON exporté)</span><textarea id="cfg-text" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></label>
+      <button class="btn" type="button" id="cfg-import">Importer</button>
+      <p class="note" id="cfg-msg" role="status"></p>
+    </fieldset>
+  </section>
+</main>
+<footer>Aide à la décision, pas un conseil en investissement. Les performances passées ne préjugent pas des performances futures. Données d’origine : reportings Amundi (PUST au 31/07/2026, PSP5 au 30/06/2026, PAEEM au 31/05/2026, PCEU, PTPXE et PAASI au 30/09/2026). Fiscalité par défaut : prélèvements sociaux de 18,6&nbsp;% et flat tax de 31,4&nbsp;% en vigueur en 2026.</footer>
+<div class="readout" id="readout" hidden>
+  <div class="readout-inner">
+    <div id="ro-a"><span class="lbl" id="ro-a-l"></span><span class="val" id="ro-a-v">—</span></div>
+    <div id="ro-b"><span class="lbl" id="ro-b-l"></span><span class="val" id="ro-b-v">—</span></div>
+    <div id="ro-c"><span class="lbl" id="ro-c-l"></span><span class="val" id="ro-c-v">—</span></div>
+  </div>
+</div>
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+  <div class="sheet-inner">
+    <h2 class="first" id="sheet-title"></h2>
+    <p class="note" id="sheet-note"></p>
+    <textarea id="sheet-text" readonly spellcheck="false"></textarea>
+    <div class="btns"><button class="btn" type="button" id="sheet-copy">Copier</button><button class="btn ghost" type="button" id="sheet-close">Fermer</button></div>
+  </div>
+</div>
