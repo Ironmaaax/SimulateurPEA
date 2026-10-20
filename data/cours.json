@@ -1,60 +1,60 @@
 {
   "source": "Yahoo Finance (cours de clôture ou dernier cours, en EUR)",
-  "updated": "2026-10-19T21:09:53Z",
+  "updated": "2026-10-20T13:36:14Z",
   "etfs": {
     "PUST": {
       "symbol": "PUST.PA",
-      "price": 106.44,
-      "date": "2026-10-19",
-      "change1d": 0.0104,
-      "ytd": 0.2265,
-      "perf1y": 0.2599,
-      "vol1y": 0.1742
+      "price": 105.24,
+      "date": "2026-10-20",
+      "change1d": -0.0113,
+      "ytd": 0.2127,
+      "perf1y": 0.2165,
+      "vol1y": 0.1745
     },
     "PSP5": {
       "symbol": "PSP5.PA",
-      "price": 60.56,
-      "date": "2026-10-19",
-      "change1d": 0.0035,
-      "ytd": 0.1815,
-      "perf1y": 0.2237,
-      "vol1y": 0.1098
+      "price": 60.2,
+      "date": "2026-10-20",
+      "change1d": -0.0059,
+      "ytd": 0.1744,
+      "perf1y": 0.1947,
+      "vol1y": 0.11
     },
     "PCEU": {
       "symbol": "PCEU.PA",
-      "price": 39.54,
-      "date": "2026-10-19",
-      "change1d": -0.0077,
-      "ytd": 0.1051,
-      "perf1y": 0.1558,
-      "vol1y": 0.1266
+      "price": 39.32,
+      "date": "2026-10-20",
+      "change1d": -0.0056,
+      "ytd": 0.0989,
+      "perf1y": 0.1384,
+      "vol1y": 0.1267
     },
     "PTPXE": {
       "symbol": "PTPXE.PA",
-      "price": 40.1,
-      "date": "2026-10-19",
-      "change1d": -0.0014,
-      "ytd": 0.2527,
-      "perf1y": 0.2768,
-      "vol1y": 0.1844
+      "price": 39.675,
+      "date": "2026-10-20",
+      "change1d": -0.0106,
+      "ytd": 0.2395,
+      "perf1y": 0.2367,
+      "vol1y": 0.1848
     },
     "PAEEM": {
       "symbol": "PAEEM.PA",
-      "price": 35.36,
-      "date": "2026-10-19",
-      "change1d": 0.0109,
-      "ytd": 0.2333,
-      "perf1y": 0.267,
-      "vol1y": 0.2188
+      "price": 34.74,
+      "date": "2026-10-20",
+      "change1d": -0.0175,
+      "ytd": 0.2117,
+      "perf1y": 0.2178,
+      "vol1y": 0.2195
     },
     "PAASI": {
       "symbol": "PAASI.PA",
-      "price": 38.17,
-      "date": "2026-10-19",
-      "change1d": 0.011,
-      "ytd": 0.2638,
-      "perf1y": 0.2884,
-      "vol1y": 0.2484
+      "price": 37.41,
+      "date": "2026-10-20",
+      "change1d": -0.0199,
+      "ytd": 0.2386,
+      "perf1y": 0.2347,
+      "vol1y": 0.2492
     }
   }
 }
