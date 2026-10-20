@@ -1,60 +1,60 @@
 {
   "source": "Yahoo Finance (cours de clôture ou dernier cours, en EUR)",
-  "updated": "2026-10-20T13:36:14Z",
+  "updated": "2026-10-20T18:29:45Z",
   "etfs": {
     "PUST": {
       "symbol": "PUST.PA",
-      "price": 105.24,
+      "price": 105.52,
       "date": "2026-10-20",
-      "change1d": -0.0113,
-      "ytd": 0.2127,
-      "perf1y": 0.2165,
-      "vol1y": 0.1745
+      "change1d": -0.0086,
+      "ytd": 0.2159,
+      "perf1y": 0.2197,
+      "vol1y": 0.1743
     },
     "PSP5": {
       "symbol": "PSP5.PA",
-      "price": 60.2,
+      "price": 60.4,
       "date": "2026-10-20",
-      "change1d": -0.0059,
-      "ytd": 0.1744,
-      "perf1y": 0.1947,
-      "vol1y": 0.11
+      "change1d": -0.0026,
+      "ytd": 0.1783,
+      "perf1y": 0.1987,
+      "vol1y": 0.1098
     },
     "PCEU": {
       "symbol": "PCEU.PA",
-      "price": 39.32,
+      "price": 39.5,
       "date": "2026-10-20",
-      "change1d": -0.0056,
-      "ytd": 0.0989,
-      "perf1y": 0.1384,
-      "vol1y": 0.1267
+      "change1d": -0.001,
+      "ytd": 0.104,
+      "perf1y": 0.1436,
+      "vol1y": 0.1266
     },
     "PTPXE": {
       "symbol": "PTPXE.PA",
-      "price": 39.675,
+      "price": 39.91,
       "date": "2026-10-20",
-      "change1d": -0.0106,
-      "ytd": 0.2395,
-      "perf1y": 0.2367,
-      "vol1y": 0.1848
+      "change1d": -0.0047,
+      "ytd": 0.2468,
+      "perf1y": 0.244,
+      "vol1y": 0.1845
     },
     "PAEEM": {
       "symbol": "PAEEM.PA",
-      "price": 34.74,
+      "price": 35.035,
       "date": "2026-10-20",
-      "change1d": -0.0175,
-      "ytd": 0.2117,
-      "perf1y": 0.2178,
-      "vol1y": 0.2195
+      "change1d": -0.0092,
+      "ytd": 0.222,
+      "perf1y": 0.2281,
+      "vol1y": 0.219
     },
     "PAASI": {
       "symbol": "PAASI.PA",
-      "price": 37.41,
+      "price": 37.7,
       "date": "2026-10-20",
-      "change1d": -0.0199,
-      "ytd": 0.2386,
-      "perf1y": 0.2347,
-      "vol1y": 0.2492
+      "change1d": -0.0123,
+      "ytd": 0.2482,
+      "perf1y": 0.2442,
+      "vol1y": 0.2487
     }
   }
 }
