@@ -1,42 +1,42 @@
 {
   "source": "Yahoo Finance (cours de clôture ou dernier cours, en EUR)",
-  "updated": "2026-10-26T15:15:04Z",
+  "updated": "2026-10-26T21:03:09Z",
   "etfs": {
     "PUST": {
       "symbol": "PUST.PA",
-      "price": 105.3,
+      "price": 105.18,
       "date": "2026-10-26",
-      "change1d": 0.0092,
-      "ytd": 0.2134,
-      "perf1y": 0.2039,
-      "vol1y": 0.1753
+      "change1d": 0.0081,
+      "ytd": 0.212,
+      "perf1y": 0.2025,
+      "vol1y": 0.1752
     },
     "PSP5": {
       "symbol": "PSP5.PA",
-      "price": 60.53,
+      "price": 60.42,
       "date": "2026-10-26",
-      "change1d": 0.0065,
-      "ytd": 0.1809,
-      "perf1y": 0.1874,
-      "vol1y": 0.1099
+      "change1d": 0.0047,
+      "ytd": 0.1787,
+      "perf1y": 0.1852,
+      "vol1y": 0.1098
     },
     "PCEU": {
       "symbol": "PCEU.PA",
-      "price": 39.65,
+      "price": 39.635,
       "date": "2026-10-26",
-      "change1d": 0.0076,
-      "ytd": 0.1082,
-      "perf1y": 0.1426,
+      "change1d": 0.0072,
+      "ytd": 0.1077,
+      "perf1y": 0.1422,
       "vol1y": 0.1275
     },
     "PTPXE": {
       "symbol": "PTPXE.PA",
-      "price": 39.86,
+      "price": 39.81,
       "date": "2026-10-26",
-      "change1d": 0.0059,
-      "ytd": 0.2452,
-      "perf1y": 0.2566,
-      "vol1y": 0.1847
+      "change1d": 0.0047,
+      "ytd": 0.2437,
+      "perf1y": 0.255,
+      "vol1y": 0.1846
     },
     "PAEEM": {
       "symbol": "PAEEM.PA",
@@ -49,11 +49,11 @@
     },
     "PAASI": {
       "symbol": "PAASI.PA",
-      "price": 37.445,
+      "price": 37.43,
       "date": "2026-10-26",
-      "change1d": 0.0103,
-      "ytd": 0.2398,
-      "perf1y": 0.2418,
+      "change1d": 0.0098,
+      "ytd": 0.2393,
+      "perf1y": 0.2413,
       "vol1y": 0.2491
     }
   }
