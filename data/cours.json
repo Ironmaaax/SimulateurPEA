@@ -1,60 +1,60 @@
 {
   "source": "Yahoo Finance (cours de clôture ou dernier cours, en EUR)",
-  "updated": "2026-10-29T15:16:22Z",
+  "updated": "2026-10-29T21:11:52Z",
   "etfs": {
     "PUST": {
       "symbol": "PUST.PA",
-      "price": 105.62,
+      "price": 105.66,
       "date": "2026-10-29",
-      "change1d": -0.012,
-      "ytd": 0.2171,
-      "perf1y": 0.1766,
-      "vol1y": 0.1763
+      "change1d": -0.0116,
+      "ytd": 0.2176,
+      "perf1y": 0.177,
+      "vol1y": 0.1762
     },
     "PSP5": {
       "symbol": "PSP5.PA",
-      "price": 60.82,
+      "price": 60.79,
       "date": "2026-10-29",
-      "change1d": -0.0041,
-      "ytd": 0.1865,
-      "perf1y": 0.1767,
+      "change1d": -0.0046,
+      "ytd": 0.1859,
+      "perf1y": 0.1761,
       "vol1y": 0.1102
     },
     "PCEU": {
       "symbol": "PCEU.PA",
-      "price": 40.2,
+      "price": 40.205,
       "date": "2026-10-29",
-      "change1d": 0.0084,
-      "ytd": 0.1235,
-      "perf1y": 0.1583,
+      "change1d": 0.0085,
+      "ytd": 0.1237,
+      "perf1y": 0.1585,
       "vol1y": 0.1277
     },
     "PTPXE": {
       "symbol": "PTPXE.PA",
-      "price": 39.915,
+      "price": 39.87,
       "date": "2026-10-29",
-      "change1d": 0.0028,
-      "ytd": 0.247,
-      "perf1y": 0.2509,
+      "change1d": 0.0016,
+      "ytd": 0.2455,
+      "perf1y": 0.2495,
       "vol1y": 0.1851
     },
     "PAEEM": {
       "symbol": "PAEEM.PA",
-      "price": 34.86,
+      "price": 35.015,
       "date": "2026-10-29",
-      "change1d": -0.0113,
-      "ytd": 0.2159,
-      "perf1y": 0.193,
-      "vol1y": 0.2205
+      "change1d": -0.0069,
+      "ytd": 0.2213,
+      "perf1y": 0.1983,
+      "vol1y": 0.2203
     },
     "PAASI": {
       "symbol": "PAASI.PA",
-      "price": 38.14,
+      "price": 38.275,
       "date": "2026-10-29",
-      "change1d": -0.0124,
-      "ytd": 0.2628,
-      "perf1y": 0.222,
-      "vol1y": 0.25
+      "change1d": -0.0089,
+      "ytd": 0.2673,
+      "perf1y": 0.2263,
+      "vol1y": 0.2498
     }
   }
 }
