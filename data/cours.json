@@ -1,59 +1,59 @@
 {
   "source": "Yahoo Finance (cours de clôture ou dernier cours, en EUR)",
-  "updated": "2026-11-04T16:22:58Z",
+  "updated": "2026-11-04T22:15:32Z",
   "etfs": {
     "PUST": {
       "symbol": "PUST.PA",
-      "price": 101.46,
+      "price": 101.78,
       "date": "2026-11-04",
-      "change1d": 0.005,
-      "ytd": 0.1692,
-      "perf1y": 0.134,
-      "vol1y": 0.1765
+      "change1d": 0.0081,
+      "ytd": 0.1729,
+      "perf1y": 0.1376,
+      "vol1y": 0.1766
     },
     "PSP5": {
       "symbol": "PSP5.PA",
-      "price": 60.05,
+      "price": 60.19,
       "date": "2026-11-04",
-      "change1d": 0.0096,
-      "ytd": 0.1715,
-      "perf1y": 0.1622,
-      "vol1y": 0.1094
+      "change1d": 0.0119,
+      "ytd": 0.1742,
+      "perf1y": 0.1649,
+      "vol1y": 0.1096
     },
     "PCEU": {
       "symbol": "PCEU.PA",
-      "price": 40.74,
+      "price": 40.735,
       "date": "2026-11-04",
-      "change1d": 0.0205,
-      "ytd": 0.1386,
-      "perf1y": 0.1829,
-      "vol1y": 0.1293
+      "change1d": 0.0204,
+      "ytd": 0.1385,
+      "perf1y": 0.1828,
+      "vol1y": 0.1292
     },
     "PTPXE": {
       "symbol": "PTPXE.PA",
-      "price": 39.15,
+      "price": 39.27,
       "date": "2026-11-04",
-      "change1d": 0.0006,
-      "ytd": 0.2231,
-      "perf1y": 0.212,
+      "change1d": 0.0037,
+      "ytd": 0.2268,
+      "perf1y": 0.2157,
       "vol1y": 0.1863
     },
     "PAEEM": {
       "symbol": "PAEEM.PA",
-      "price": 33.99,
+      "price": 34.105,
       "date": "2026-11-04",
-      "change1d": 0.0027,
-      "ytd": 0.1856,
-      "perf1y": 0.168,
-      "vol1y": 0.2225
+      "change1d": 0.006,
+      "ytd": 0.1896,
+      "perf1y": 0.172,
+      "vol1y": 0.2226
     },
     "PAASI": {
       "symbol": "PAASI.PA",
-      "price": 36.835,
+      "price": 36.985,
       "date": "2026-11-04",
-      "change1d": -0.0015,
-      "ytd": 0.2196,
-      "perf1y": 0.1944,
+      "change1d": 0.0026,
+      "ytd": 0.2245,
+      "perf1y": 0.1992,
       "vol1y": 0.2515
     }
   }
